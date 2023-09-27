@@ -1,8 +1,14 @@
 import React, {FC} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Flag from './Flag';
+import DisplayTime from './DisplayTime';
 
-const Header: FC<HeaderProps> = ({onFlagPress, flagsLeft, onNewGame}) => {
+const Header: FC<HeaderProps> = ({
+  onFlagPress,
+  flagsLeft,
+  onNewGame,
+  timeStart,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.flagContainer}>
@@ -11,6 +17,7 @@ const Header: FC<HeaderProps> = ({onFlagPress, flagsLeft, onNewGame}) => {
         </TouchableOpacity>
         <Text style={styles.flagsLeft}>= {flagsLeft}</Text>
       </View>
+      <DisplayTime status={timeStart} />
       <TouchableOpacity style={styles.button} onPress={onNewGame}>
         <Text style={styles.buttonLabel}>Novo Jogo</Text>
       </TouchableOpacity>
@@ -37,6 +44,7 @@ const styles = StyleSheet.create({
   },
   flagsLeft: {
     fontSize: 30,
+    color: '#000',
     fontWeight: 'bold',
     paddingTop: 5,
     marginLeft: 20,
@@ -48,7 +56,7 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     fontSize: 20,
-    color: '#DDD',
+    color: '#000',
     fontWeight: 'bold',
   },
 });

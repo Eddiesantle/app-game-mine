@@ -11,7 +11,7 @@ import {
   showMines,
   wonGame,
 } from './../functions';
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, Vibration, View} from 'react-native';
 import LevelSelection from './LevelSelection';
 import Header from './../components/Header';
 import MineField from './../components/MineField';
@@ -30,6 +30,7 @@ interface State {
   board: PropsCreateMinedBoards[][];
   won: boolean;
   lost: boolean;
+  start: boolean;
   showLevelSelection: boolean;
 }
 
@@ -52,6 +53,7 @@ export default class Home extends Component<{}, State> {
       board: createMinedBoards(rows, cols, this.minesAmount()),
       won: false,
       lost: false,
+      start: false,
       showLevelSelection: false,
     };
   };
@@ -62,15 +64,22 @@ export default class Home extends Component<{}, State> {
     const lost = hadExplosion(board);
     const won = wonGame(board);
 
+    Vibration.vibrate();
+
+    // start game
+    let start = true;
+
     if (lost) {
       showMines(board);
-      Alert.alert('Perdeeeeuuu!', 'Que Otario!!');
+      start = false;
+      Alert.alert('Perdeeeeuuu!', 'Aposto 10 pila que não consegue ganhar!!');
     }
 
     if (won) {
+      start = false;
       Alert.alert('Parabénnnsss!!', 'Tu é brabo!');
     }
-    this.setState({board, lost, won});
+    this.setState({board, lost, won, start});
   };
 
   onSelectField = (row: number, column: number) => {
@@ -103,6 +112,7 @@ export default class Home extends Component<{}, State> {
         />
         <Header
           flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          timeStart={this.state.start}
           onNewGame={() => this.setState(this.createState())}
           onFlagPress={() => this.setState({showLevelSelection: true})}
         />
@@ -137,10 +147,6 @@ const styles = StyleSheet.create({
   //   alignItems: 'center',
   //   backgroundColor: '#f5fcff',
   // },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',

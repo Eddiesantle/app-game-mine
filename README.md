@@ -7,6 +7,7 @@ Este é um novo projeto React Native para um aplicativo de Campo Minado. O objet
 ![Logo do Markdown](src/assets/app/image-1.jpeg)
 ![Logo do Markdown](src/assets/app/image-2.jpeg)
 ![Logo do Markdown](src/assets/app/image-3.jpeg)
+![Logo do Markdown](src/assets/app/image-4.jpeg)
 
 ## Começando
 

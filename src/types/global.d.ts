@@ -29,6 +29,7 @@ interface FlagProps {
 
 interface HeaderProps {
   onFlagPress: () => void;
+  timeStart: boolean;
   flagsLeft: string | number;
   onNewGame: () => void;
 }
